@@ -1,0 +1,53 @@
+[package]
+name = "archive-rs"
+version = "0.0.1"
+authors = ["Christian Krause <christian.krause@mailbox.org>"]
+description = "archive file library"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+documentation = "https://github.com/archive-rs/archive-rs#readme"
+homepage = "https://github.com/archive-rs/archive-rs"
+repository = "https://docs.rs/archive-rs"
+categories = ["compression", "encoding", "filesystem"]
+keywords = ["archive"]
+edition = "2021"
+
+[dependencies]
+path-utils = "0.1"
+thiserror = "1"
+
+[dev-dependencies]
+anyhow = "1"
+bytesize = "1"
+clap = "3"
+
+[dependencies.bzip2]
+version = "0.4"
+optional = true
+
+[dependencies.bzip2-rs]
+version = "0.1"
+optional = true
+
+[dependencies.flate2]
+version = "1"
+optional = true
+
+[dependencies.lz4]
+version = "1"
+optional = true
+
+[dependencies.tar]
+version = "0.4"
+optional = true
+
+[dependencies.xz2]
+version = "0.1"
+optional = true
+
+[dependencies.zstd]
+version = "0.10"
+optional = true
+
+[features]
+default = ["bzip2", "flate2", "lz4", "tar", "xz2", "zstd"]
