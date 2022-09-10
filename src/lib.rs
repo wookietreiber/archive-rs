@@ -9,7 +9,7 @@
 compile_error!("there must be at least one archive file format feature");
 
 #[cfg(all(feature = "bzip2", feature = "bzip2-rs"))]
-compile_warn!("there must be only one bzip2 feature");
+compile_error!("there must be only one bzip2 feature");
 
 mod archive;
 mod entry;
