@@ -13,11 +13,12 @@ compile_error!("there must be at least one archive file format feature");
 compile_error!("there must be only one bzip2 feature");
 
 mod archive;
+mod entries;
 mod entry;
 mod error;
 
 pub use archive::Archive;
-pub use archive::Entries;
+pub use entries::Entries;
 pub use entry::Entry;
 pub use entry::EntryType;
 pub use error::Error;
