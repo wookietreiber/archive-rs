@@ -19,7 +19,7 @@ thiserror = "1"
 [dev-dependencies]
 anyhow = "1"
 bytesize = "1"
-clap = "3"
+clap = "4"
 
 [dependencies.bzip2]
 version = "0.4"
