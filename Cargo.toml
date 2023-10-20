@@ -46,7 +46,7 @@ version = "0.1"
 optional = true
 
 [dependencies.zstd]
-version = "0.10"
+version = "0.13"
 optional = true
 
 [features]
