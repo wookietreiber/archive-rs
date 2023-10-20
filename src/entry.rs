@@ -1,5 +1,5 @@
 use std::borrow::Cow;
-#[cfg(any(feature = "tar"))]
+#[cfg(feature = "tar")]
 use std::fs::File;
 #[cfg(feature = "zstd")]
 use std::io::BufReader;
