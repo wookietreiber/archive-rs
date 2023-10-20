@@ -2,6 +2,7 @@
 //!
 //! [archive files]: https://en.wikipedia.org/wiki/Archive_file
 
+#![forbid(unsafe_code)]
 #![deny(clippy::all, missing_docs, unused_must_use)]
 #![warn(clippy::pedantic, clippy::nursery, clippy::cargo)]
 
