@@ -3,7 +3,7 @@ use std::path::{Path, PathBuf};
 use anyhow::Result;
 use archive_rs::{Archive, Entry};
 use bytesize::ByteSize;
-use clap::{Arg, ArgMatches, Command};
+use clap::{Arg, ArgAction, ArgMatches, Command};
 
 #[derive(Copy, Clone)]
 struct Config {
@@ -14,15 +14,15 @@ struct Config {
 fn main() -> Result<()> {
     let args = args();
 
+    let config = Config {
+        long: args.get_flag("long"),
+        humanize: args.get_flag("humanize"),
+    };
+
     let archives: Vec<&PathBuf> = args
         .get_many("archive")
         .expect("`archive`s are required")
         .collect();
-
-    let config = Config {
-        long: args.contains_id("long"),
-        humanize: args.contains_id("humanize"),
-    };
 
     for path in archives {
         let mut archive = Archive::open(path)?;
@@ -71,26 +71,36 @@ fn args() -> ArgMatches {
     cli().get_matches()
 }
 
-fn cli() -> Command<'static> {
+fn cli() -> Command {
     let archive = Arg::new("archive")
-        .required(true)
-        .multiple_values(true)
+        .action(ArgAction::Append)
         .value_parser(clap::value_parser!(PathBuf))
         .help("archive files");
 
     let humanize = Arg::new("humanize")
         .short('h')
         .long("humanize")
+        .action(ArgAction::SetTrue)
         .help("humanize bytes");
 
     let long = Arg::new("long")
         .short('l')
         .long("long")
+        .action(ArgAction::SetTrue)
         .help("print extended metadata");
+
+    let help = Arg::new("help")
+        .short('?')
+        .long("help")
+        .action(ArgAction::Help)
+        .help("print help (use --help to see all options)")
+        .long_help("Print help.");
 
     Command::new("archive-ls")
         .arg(archive)
         .arg(humanize)
         .arg(long)
-        .mut_arg("help", |a| a.short('?'))
+        .disable_help_flag(true)
+        .disable_version_flag(true)
+        .arg(help)
 }
