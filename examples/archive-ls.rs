@@ -19,17 +19,23 @@ fn main() -> Result<()> {
         humanize: args.get_flag("humanize"),
     };
 
-    let archives: Vec<&PathBuf> = args
-        .get_many("archive")
-        .expect("`archive`s are required")
-        .collect();
+    if args.get_flag("list-archive-formats") {
+        for x in archive_rs::support::Format::all_file_endings() {
+            println!("{}", x);
+        }
+    } else {
+        let archives: Vec<&PathBuf> = args
+            .get_many("archive")
+            .expect("`archive`s are required")
+            .collect();
 
-    for path in archives {
-        let mut archive = Archive::open(path)?;
+        for path in archives {
+            let mut archive = Archive::open(path)?;
 
-        for entry in archive.entries()? {
-            let entry = entry?;
-            ls_entry(path, &entry, config)?;
+            for entry in archive.entries()? {
+                let entry = entry?;
+                ls_entry(path, &entry, config)?;
+            }
         }
     }
 
@@ -73,6 +79,7 @@ fn args() -> ArgMatches {
 
 fn cli() -> Command {
     let archive = Arg::new("archive")
+        .required_unless_present("list-archive-formats")
         .action(ArgAction::Append)
         .value_parser(clap::value_parser!(PathBuf))
         .help("archive files");
@@ -100,6 +107,7 @@ fn cli() -> Command {
         .arg(archive)
         .arg(humanize)
         .arg(long)
+        .arg(archive_rs::clap::list_archive_formats())
         .disable_help_flag(true)
         .disable_version_flag(true)
         .arg(help)

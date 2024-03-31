@@ -21,6 +21,10 @@ anyhow = "1"
 bytesize = "1"
 clap = "4"
 
+[dependencies.clap]
+version = "4"
+optional = true
+
 [dependencies.bzip2]
 version = "0.4"
 optional = true
@@ -51,3 +55,7 @@ optional = true
 
 [features]
 default = ["bzip2", "flate2", "lz4", "tar", "xz2", "zstd"]
+
+[[example]]
+name = "archive-ls"
+required-features = ["clap"]
