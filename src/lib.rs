@@ -16,6 +16,7 @@ mod archive;
 mod entries;
 mod entry;
 mod error;
+pub mod support;
 
 pub use archive::Archive;
 pub use entries::Entries;
