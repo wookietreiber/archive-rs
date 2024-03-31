@@ -1,6 +1,6 @@
 [package]
 name = "archive-rs"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Christian Krause <christian.krause@mailbox.org>"]
 description = "archive file library"
 license = "MIT OR Apache-2.0"
