@@ -14,7 +14,7 @@ edition = "2021"
 
 [dependencies]
 path-utils = "0.1"
-thiserror = "1"
+thiserror = "2"
 
 [dev-dependencies]
 anyhow = "1"
