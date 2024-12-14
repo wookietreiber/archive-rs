@@ -58,7 +58,7 @@ pub enum Entry<'a> {
     __Phantom(std::marker::PhantomData<&'a str>),
 }
 
-impl<'a> Entry<'a> {
+impl Entry<'_> {
     /// Returns the file type of this entry.
     pub fn entry_type(&self) -> EntryType {
         match self {
